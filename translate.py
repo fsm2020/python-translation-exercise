@@ -51,12 +51,11 @@ def get_complement(sequence):
 
 def reverse_and_complement(sequence):
     """Get the reversed and complemented form of `sequence`.
-
     Returns a string that is the reversed and complemented sequence
     of `sequence`.
-
     If `sequence` is empty, an empty string is returned.
     """
+    return get_reverse(get_complement(sequence))
     pass
 
 def get_longest_peptide(rna_sequence, genetic_code):
