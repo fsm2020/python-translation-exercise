@@ -11,11 +11,11 @@ def translate_sequence(rna_sequence, genetic_code):
     If `rna_sequence` is less than 3 bases long, or starts with a stop codon,
     an empty string is returned.
     """
-    rna_seqs = rna_sequence.upper()
-    start_pos = 0
+    rna_seq = rna_sequence.upper()
+    start = 0
     proteins = ''
-    for i in range(start_pos, len(rna_seqs), 3):
-        codon = rna_seqs[i:i + 3]
+    for i in range(start, len(rna_seq), 3):
+        codon = rna_seq[i:i + 3]
         if codon in ['UAG', 'UAA', 'UGA'] or len(codon) != 3:
             break
         else: proteins += genetic_code[codon]
@@ -23,26 +23,26 @@ def translate_sequence(rna_sequence, genetic_code):
     pass
 
 def get_all_translations(rna_sequence, genetic_code):
-    rna_seqs = rna_sequence.upper()
-    aa_list = []
-    start_pos = 0
+    rna_seq = rna_sequence.upper()
+    amino_seq = []
+    start = 0
 
-    def translate(start_pos,rna_seqs,genetic_code):
+    def translate(start,rna_seq,genetic_code):
         proteins = ''
-        for i in range(start_pos, len(rna_seqs), 3):
-            codon = rna_seqs[i:i + 3]
+        for i in range(start, len(rna_seq), 3):
+            codon = rna_seq[i:i + 3]
             if codon in ['UAG', 'UAA', 'UGA'] or len(codon) != 3:
                 break
             else: proteins += genetic_code[codon]
         return proteins
 
-    while start_pos < len(rna_seqs):
-        start_codon = rna_seqs[start_pos:start_pos + 3]
+    while start < len(rna_seq):
+        start_codon = rna_seq[start:start + 3]
         if start_codon == 'AUG':
-            translation = translate(start_pos, rna_seqs, genetic_code)
-            aa_list.append(translation)
-        start_pos += 1
-    return aa_list
+            translation = translate(start, rna_seq, genetic_code)
+            amino_seq.append(translation)
+        start += 1
+    return amino_seq
     pass
 
 def get_reverse(sequence):
@@ -83,31 +83,6 @@ def get_longest_peptide(rna_sequence, genetic_code):
     If no amino acids can be translated from `rna_sequence` nor its reverse and
     complement, an empty string is returned.
     """
-    rna_seqs = rna_sequence.upper()
-    rev_comp = get_reverse(get_complement(rna_seqs)
-    aa_list = []
-    start_pos = 0
-
-    def rev_compRNA (rna_seqs)
-        rev_compRNAs = get_reverse(get_complement(rna_seqs))
-        return rev_compRNAs
-
-    def translate(rev_compRNAS,rna_seqs,genetic_code):
-        proteins = ''
-        for i in range(start_pos, len(rna_seqs), 6):
-            codon = rna_seqs[i:i + 6]
-            if codon in ['UAG', 'UAA', 'UGA'] or len(codon) != 6:
-                break
-            else: proteins += genetic_code[codon]
-        return proteins
-
-    while start_pos < len(rna_seqs):
-        start_codon = rna_seqs[start_pos:start_pos + 6]
-        if start_codon == 'AUG':
-            translation = translate(start_pos, rna_seqs, genetic_code)
-            aa_list.append(translation)
-        start_pos += 1
-    return aa_list
     pass
 
 if __name__ == '__main__':
