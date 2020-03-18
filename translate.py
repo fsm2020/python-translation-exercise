@@ -42,11 +42,11 @@ def get_reverse(sequence):
 
 def get_complement(sequence):
     """Get the complement of `sequence`.
-
     Returns a string with the complementary sequence of `sequence`.
-
     If `sequence` is empty, an empty string is returned.
     """
+    complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A', 'A': 'U', 'U': 'A'}
+    return ''.join(complement.get(base, base) for base in sequence.upper())
     pass
 
 def reverse_and_complement(sequence):
