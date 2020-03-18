@@ -23,6 +23,20 @@ def translate_sequence(rna_sequence, genetic_code):
     pass
 
 def get_all_translations(rna_sequence, genetic_code):
+    """Get a list of all amino acid sequences encoded by an RNA sequence.
+
+    All three reading frames of `rna_sequence` are scanned from 'left' to
+    'right', and the generation of a sequence of amino acids is started
+    whenever the start codon 'AUG' is found. The `rna_sequence` is assumed to
+    be in the correct orientation (i.e., no reverse and/or complement of the
+    sequence is explored).
+
+    The function returns a list of all possible amino acid sequences that
+    are encoded by `rna_sequence`.
+
+    If no amino acids can be translated from `rna_sequence`, an empty list is
+    returned.
+    """
     rna_seq = rna_sequence.upper()
     amino_seq = []
     start = 0
@@ -83,6 +97,28 @@ def get_longest_peptide(rna_sequence, genetic_code):
     If no amino acids can be translated from `rna_sequence` nor its reverse and
     complement, an empty string is returned.
     """
+    rna_seq = rna_sequence.upper()
+    amino_seq = []
+    start = 0
+    rev_compRNA = get_reverse(get_complement(rna_seq))
+    return rev_compRNA
+
+    def translate(start,rev_compRNA,genetic_code):
+        proteins = ''
+        for i in range(start, len(rev_compRNA), 3):
+            codon = rev_compRNA[i:i + 3]
+            if codon in ['UAG', 'UAA', 'UGA'] or len(codon) != 3:
+                break
+            else: proteins += genetic_code[codon]
+        return proteins
+
+    while start < len(rev_compRNA):
+        start_codon = rev_compRNA[start:start + 3]
+        if start_codon == 'AUG':
+            translation = translate(start, rev_compRNA, genetic_code)
+            amino_seq.append(translation)
+        start += 1
+    return amino_seq
     pass
 
 if __name__ == '__main__':
