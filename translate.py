@@ -34,11 +34,10 @@ def get_all_translations(rna_sequence, genetic_code):
 
 def get_reverse(sequence):
     """Reverse orientation of `sequence`.
-
     Returns a string with `sequence` in the reverse order.
-
     If `sequence` is empty, an empty string is returned.
     """
+    return ''.join(reversed(sequence.upper()))
     pass
 
 def get_complement(sequence):
